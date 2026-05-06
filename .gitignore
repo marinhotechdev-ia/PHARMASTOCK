@@ -1,50 +1,63 @@
-# Arquivos de Planejamento e Docs
+# ══════════════════════════════════════════════════════
+# PHARMASTOCK — .gitignore
+# ══════════════════════════════════════════════════════
+
+# ── Banco de Dados (contém dados sensíveis) ──────────
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Scripts auxiliares de uso único ──────────────────
+hash_senhas.py
+populate_db.py
+fix_db.py
+add_despesas.py
+add_movimentos.py
+add_vendas_movimentos.py
+make_favicon.py
+
+# ── Arquivos de planejamento / rascunho ──────────────
 /planejamento
+teste.txt
+*.log
 
-# Ambiente e Configurações Sensíveis
-.env
-.venv/
-env/
-venv/
-ENV/
-*.code-workspace
-*.pem
-*.key
-*.cert
-
-# Dependências
-node_modules/
-backend/node_modules/
+# ── Python ───────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
-.pytest_cache/
-.cache/
+*.pyo
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
 
-# Bancos de Dados e Dados Locais
-*.sqlite
-*.sqlite3
-*.db
-backend/db.sqlite
-database.json
-data/
+# ── Node / NPM (caso adicione no futuro) ────────────
+node_modules/
+package-lock.json
+yarn.lock
 
-# Logs e Temporários
-*.log
-*.bak
-*.tmp
-*.swp
-.DS_Store
-Thumbs.db
-teste.txt
-
-# IDEs e Editores
+# ── IDEs e Editores ─────────────────────────────────
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 .project
 .settings/
 .classpath
 
-# Scripts de Servidor específicos (se necessário)
-backend/server.js
-*.py
+# ── Sistema Operacional ─────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*.orig
+
+# ── Gemini / IA ─────────────────────────────────────
+.gemini/
