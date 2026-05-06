@@ -47,3 +47,4 @@ teste.txt
 
 # Scripts de Servidor específicos (se necessário)
 backend/server.js
+*.py
