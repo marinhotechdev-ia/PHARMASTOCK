@@ -6,3 +6,4 @@ PHARMASTOCK.code-workspace
 backend/server.js
 .DS_Store
 database.json
+data/
