@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="pages/alertas.css">
+
+<div class="alrt-pagina">
+  <div class="alrt-pagina__topo">
+    <h1 class="alrt-pagina__titulo">Alertas de <span>Inventário</span></h1>
+    
+    <!-- Filtros Rápidos -->
+    <div class="alrt-filtros">
+      <button class="alrt-btn-filtro alrt-btn-filtro--ativo" data-filtro="todos">Todos</button>
+      <button class="alrt-btn-filtro" data-filtro="vencidos">Vencidos</button>
+      <button class="alrt-btn-filtro" data-filtro="proximos">Vencendo (30 dias)</button>
+      <button class="alrt-btn-filtro" data-filtro="estoque">Estoque Baixo</button>
+    </div>
+  </div>
+
+  <!-- Painel 1: Validade -->
+  <div class="alrt-painel" id="painel-vencimentos">
+    <h2 class="alrt-painel__titulo"><span aria-hidden="true">⏳</span> Validade e Vencimentos</h2>
+    <div class="alrt-grid" id="grid-vencimentos"></div>
+  </div>
+
+  <!-- Painel 2: Estoque -->
+  <div class="alrt-painel" id="painel-estoque">
+    <h2 class="alrt-painel__titulo"><span aria-hidden="true">📉</span> Estoque Crítico</h2>
+    <div class="alrt-grid" id="grid-estoque"></div>
+  </div>
+</div>
+
+<script src="pages/alertas.js"></script>

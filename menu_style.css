@@ -1,0 +1,516 @@
+/* =============================================================
+   VARIÁVEIS GLOBAIS E FONTES
+   ============================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+  --cor-fundo-cabecalho: #08223a;
+  --cor-fundo-menu: #00b4e6;
+  --cor-fundo-area: #dbdbdb;
+  --cor-fundo-onda: #00b4e6;
+  --cor-btn-menu: #fff;
+  --cor-btn-menu-hover: #e0f7fa;
+  --cor-titulo-menu: #fff;
+  --cor-titulo-cabecalho: #fff;
+  --cor-pesquisa: #2c3e50;
+  --cor-placeholder: #b0b0b0;
+  --cor-icone: #fff;
+  --cor-usuario: #fff;
+  --cor-rodape-menu: #fff;
+  --cor-texto-menu: #222;
+  --cor-texto-menu-ativo: #0077b6;
+  --fonte-principal: 'Montserrat', Arial, sans-serif;
+  
+  /* Variáveis de layout e cards */
+  --espaco-md: 16px;
+  --espaco-lg: 24px;
+  --cor-fundo-card: #ffffff;
+  --raio-borda-card: 16px;
+  --cor-texto-card: #08223a;
+}
+
+
+/* =============================================================
+   RESET BÁSICO
+   ============================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fonte-principal);
+  background: var(--cor-fundo-cabecalho);
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Utilitário de acessibilidade: oculta visualmente mas mantém para leitores de tela */
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* =============================================================
+   CABEÇALHO
+   ============================================================= */
+.cabecalho {
+  width: 100vw;
+  height: 64px;
+  background: var(--cor-fundo-cabecalho);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.cabecalho__esquerda {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cabecalho__titulo {
+  color: var(--cor-titulo-cabecalho);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.cabecalho__logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.cabecalho__centro {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Wrapper direto do input — o ícone se posiciona em relação a ele */
+.cabecalho__pesquisa-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cabecalho__pesquisa {
+  width: 340px;
+  max-width: 40vw;
+  padding: 8px 36px 8px 16px;
+  border-radius: 18px;
+  border: none;
+  background: rgba(255, 255, 255, 0.13);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.cabecalho__pesquisa::placeholder {
+  color: var(--cor-placeholder);
+  opacity: 1;
+}
+
+.cabecalho__pesquisa-icone {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cor-placeholder);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.cabecalho__direita {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Botões de ícone no cabeçalho (modo noturno, notificações) */
+.cabecalho__icone-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--cor-icone);
+  font-size: 1.3rem;
+  position: relative;
+  padding: 4px;
+  line-height: 1;
+}
+
+.notificacao-bolinha {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #ff2d2d;
+  border-radius: 50%;
+  position: absolute;
+  top: -4px;
+  left: 10px;
+  border: 2px solid var(--cor-fundo-cabecalho);
+}
+
+.cabecalho__usuario-nome {
+  color: var(--cor-usuario);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.cabecalho__avatar-usuario {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #222;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+
+/* =============================================================
+   LAYOUT PRINCIPAL (menu lateral + conteúdo)
+   ============================================================= */
+.layout {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: calc(100vh - 64px);
+}
+
+
+/* =============================================================
+   MENU LATERAL
+   ============================================================= */
+.menu-lateral {
+  width: 270px;
+  min-width: 220px;
+  height: 100%;
+  background: var(--cor-fundo-menu);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px 0 0 0;
+  position: relative;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
+  overflow-y: auto;
+}
+
+.menu-lateral__titulo {
+  color: var(--cor-titulo-menu);
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-left: 32px;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+}
+
+.menu-lateral__lista {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 0;
+  margin-bottom: 40px;
+}
+
+.menu-lateral__item {
+  width: 85%;
+  margin: 0 auto 18px;
+}
+
+/* Botão de cada item do menu */
+.menu-lateral__btn {
+  width: 100%;
+  background: var(--cor-btn-menu);
+  color: var(--cor-texto-menu);
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 1.1rem;
+  font-family: var(--fonte-principal);
+  font-weight: 500;
+  padding: 10px 24px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: background 0.2s, color 0.2s;
+  text-align: left;
+}
+
+.menu-lateral__btn--ativo,
+.menu-lateral__btn:hover {
+  background: var(--cor-btn-menu-hover);
+  color: var(--cor-texto-menu-ativo);
+}
+
+.menu-lateral__icone {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   SUBMENU
+   ============================================================= */
+.submenu {
+  display: none;
+  list-style: none;
+  padding: 8px 8px 0 8px;
+  margin-top: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.submenu.visivel {
+  display: flex;
+}
+
+.submenu__link {
+  display: block;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #333;
+  font-size: 1rem;
+  font-family: var(--fonte-principal);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+
+.submenu__link:hover,
+.submenu__link:focus,
+.submenu__link--ativo {
+  background-color: #f0f0f0;
+  outline: none;
+}
+
+
+/* =============================================================
+   MENU DROPDOWN DO PERFIL
+   ============================================================= */
+.perfil-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.perfil-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.perfil-info:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cabecalho__avatar-usuario {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.perfil-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  width: 200px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+  z-index: 100;
+  animation: fadeInDown 0.2s ease-out;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.perfil-dropdown__lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.perfil-dropdown__btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--fonte-principal);
+  font-size: 0.95rem;
+  color: #444;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+}
+
+.perfil-dropdown__btn:hover {
+  background: #f0f7fb;
+  color: #0077b6;
+}
+
+.perfil-dropdown__icone {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.perfil-dropdown__separador {
+  height: 1px;
+  background: #eaeaea;
+  margin: 8px 0;
+}
+
+.perfil-dropdown__btn--sair {
+  color: #c0392b;
+}
+
+.perfil-dropdown__btn--sair:hover {
+  background: #fef0f0;
+  color: #a93226;
+}
+
+
+/* =============================================================
+   CONTEÚDO PRINCIPAL
+   ============================================================= */
+.conteudo-principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.conteudo-principal__area {
+  flex: 1;
+  background: var(--cor-fundo-area);
+  width: 100%;
+  height: calc(100% - 60px);
+}
+
+.conteudo-principal__onda {
+  width: 100%;
+  height: 80px;
+  background: var(--cor-fundo-onda);
+  border-radius: 0 0 80px 80px / 100px 100px 80px 80px;
+  margin-top: -40px;
+  z-index: 1;
+}
+
+
+/* =============================================================
+   GRADE DE MÓDULOS (cartões)
+   ============================================================= */
+.modulos-grade {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espaco-md);
+  max-width: 700px;
+}
+
+.modulo-card {
+  background-color: var(--cor-fundo-card);
+  border-radius: var(--raio-borda-card);
+  padding: var(--espaco-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espaco-md);
+  min-height: 110px;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.modulo-card:hover {
+  filter: brightness(0.93);
+  transform: translateY(-2px);
+}
+
+.modulo-card__titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cor-texto-card);
+}
+
+.modulo-card__icone {
+  font-size: 2.4rem;
+  align-self: center;
+  margin: auto;
+}
+
+
+/* =============================================================
+   RESPONSIVIDADE
+   ============================================================= */
+@media (max-width: 900px) {
+  .cabecalho__centro {
+    display: none;
+  }
+
+  .menu-lateral {
+    min-width: 80px;
+    width: 120px;
+    padding-left: 0;
+  }
+
+  .menu-lateral__titulo {
+    font-size: 1.1rem;
+    margin-left: 12px;
+  }
+
+  .menu-lateral__btn {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  .conteudo-principal__onda {
+    height: 40px;
+    margin-top: -20px;
+  }
+}

@@ -1,0 +1,244 @@
+<!-- ============================================================
+  pages/funcionarios.html
+  Miolo injetado pelo roteador — sem <html>, <head> nem <body>.
+  Requisitos cobertos: RF-F01, RF-F02, RF-F03, RF-F04
+============================================================ -->
+
+<link rel="stylesheet" href="pages/funcionarios.css?v=2">
+
+<article class="func-pagina" aria-labelledby="titulo-funcionarios">
+
+  <!-- Topo: título + botão de novo cadastro -->
+  <header class="func-pagina__topo">
+    <h2 class="func-pagina__titulo" id="titulo-funcionarios">
+      Cadastro de <span>Funcionários</span>
+    </h2>
+    <button class="btn-primario" id="btn-novo-funcionario" aria-expanded="false" aria-controls="form-funcionario">
+      <span aria-hidden="true">＋</span> Novo Funcionário
+    </button>
+  </header>
+
+  <!-- ── Formulário de cadastro / edição (RF-F01, RF-F02, RF-F03) -->
+  <section
+    class="func-card"
+    id="form-funcionario"
+    aria-label="Formulário de cadastro de funcionário"
+    hidden
+  >
+    <h3 class="func-card__titulo">
+      <span aria-hidden="true">📝</span>
+      <span id="form-funcionario__modo-titulo">Novo Funcionário</span>
+    </h3>
+
+    <form class="func-form" id="form-func" novalidate>
+
+      <!-- RF-F01: Nome -->
+      <div class="func-form__grupo">
+        <label class="func-form__label func-form__label--obrigatorio" for="func-nome">
+          Nome completo
+        </label>
+        <input
+          type="text"
+          id="func-nome"
+          name="nome"
+          class="func-form__input"
+          placeholder="Ex: Maria da Silva"
+          required
+          autocomplete="name"
+        >
+      </div>
+
+      <!-- RF-F01: CPF -->
+      <div class="func-form__grupo">
+        <label class="func-form__label func-form__label--obrigatorio" for="func-cpf">
+          CPF
+        </label>
+        <input
+          type="text"
+          id="func-cpf"
+          name="cpf"
+          class="func-form__input"
+          placeholder="000.000.000-00"
+          maxlength="14"
+          required
+        >
+      </div>
+
+      <!-- RF-F01: Cargo -->
+      <div class="func-form__grupo">
+        <label class="func-form__label func-form__label--obrigatorio" for="func-cargo">
+          Cargo
+        </label>
+        <input
+          type="text"
+          id="func-cargo"
+          name="cargo"
+          class="func-form__input"
+          placeholder="Ex: Atendente, Farmacêutico"
+          required
+        >
+      </div>
+
+      <!-- RF-F01: Telefone -->
+      <div class="func-form__grupo">
+        <label class="func-form__label func-form__label--obrigatorio" for="func-telefone">
+          Telefone
+        </label>
+        <input
+          type="tel"
+          id="func-telefone"
+          name="telefone"
+          class="func-form__input"
+          placeholder="(00) 00000-0000"
+          maxlength="15"
+          required
+        >
+      </div>
+
+      <!-- RF-F02: Perfil de Acesso -->
+      <div class="func-form__grupo">
+        <label class="func-form__label func-form__label--obrigatorio" for="func-perfil">
+          Perfil de acesso
+        </label>
+        <select id="func-perfil" name="perfil" class="func-form__select" required>
+          <option value="" disabled selected>Selecione um perfil…</option>
+          <option value="administrador">Administrador</option>
+          <option value="farmaceutico">Farmacêutico</option>
+          <option value="atendente">Atendente</option>
+        </select>
+      </div>
+
+      <!-- RF-F01: Login -->
+      <div class="func-form__grupo">
+        <label class="func-form__label func-form__label--obrigatorio" for="func-login">
+          Login
+        </label>
+        <input
+          type="text"
+          id="func-login"
+          name="login"
+          class="func-form__input"
+          placeholder="Ex: maria.silva"
+          required
+          autocomplete="username"
+        >
+      </div>
+
+      <!-- RF-F01: Senha (só exibida no cadastro novo) -->
+      <div class="func-form__grupo" id="grupo-senha">
+        <label class="func-form__label func-form__label--obrigatorio" for="func-senha">
+          Senha
+        </label>
+        <input
+          type="password"
+          id="func-senha"
+          name="senha"
+          class="func-form__input"
+          placeholder="Mínimo 8 caracteres"
+          minlength="8"
+          autocomplete="new-password"
+        >
+      </div>
+
+      <!-- Confirmar senha -->
+      <div class="func-form__grupo" id="grupo-confirma-senha">
+        <label class="func-form__label func-form__label--obrigatorio" for="func-confirma-senha">
+          Confirmar senha
+        </label>
+        <input
+          type="password"
+          id="func-confirma-senha"
+          name="confirmaSenha"
+          class="func-form__input"
+          placeholder="Repita a senha"
+          minlength="8"
+          autocomplete="new-password"
+        >
+      </div>
+
+      <!-- Ações do formulário -->
+      <div class="func-form__acoes">
+        <button type="button" class="btn-perigo" id="btn-status-func" style="margin-right: auto;" hidden>
+          Inativar Funcionário
+        </button>
+        <button type="button" class="btn-secundario" id="btn-cancelar-form">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primario">
+          <span aria-hidden="true">💾</span> Salvar Funcionário
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ── Tabela de funcionários cadastrados (RF-F03, RF-F04) ─── -->
+  <section class="func-card" aria-label="Lista de funcionários">
+    <h3 class="func-card__titulo">
+      <span aria-hidden="true">👥</span> Funcionários Cadastrados
+    </h3>
+
+    <div class="func-tabela-wrapper">
+      <table class="func-tabela" aria-label="Tabela de funcionários">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 40px; text-align: center;"></th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Perfil</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-funcionarios-corpo">
+          <!-- Linha de exemplo — será substituída por dados reais do back-end -->
+          <tr>
+            <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
+            <td>Ana Paula Ramos</td>
+            <td>012.345.678-90</td>
+            <td>Farmacêutica</td>
+            <td><span class="badge badge--farmac">Farmacêutico</span></td>
+            <td><span class="badge badge--ativo">Ativo</span></td>
+            <td>
+              <div class="func-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" aria-label="Editar Ana Paula Ramos">Editar</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="linha-detalhes" hidden>
+            <td colspan="7">
+              <div class="detalhes-conteudo">
+                <p><strong>Login:</strong> ana.ramos</p>
+                <p><strong>Telefone:</strong> (11) 91234-5678</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
+            <td>Carlos Mendes</td>
+            <td>098.765.432-10</td>
+            <td>Atendente</td>
+            <td><span class="badge badge--atendente">Atendente</span></td>
+            <td><span class="badge badge--inativo">Inativo</span></td>
+            <td>
+              <div class="func-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" aria-label="Editar Carlos Mendes">Editar</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="linha-detalhes" hidden>
+            <td colspan="7">
+              <div class="detalhes-conteudo">
+                <p><strong>Login:</strong> carlos.mendes</p>
+                <p><strong>Telefone:</strong> (21) 98765-1234</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</article>
+<script src="pages/funcionarios.js"></script>

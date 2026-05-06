@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="pages/movimentos.css">
+
+<div class="mov-pagina">
+  <div class="mov-pagina__topo">
+    <h1 class="mov-pagina__titulo">Movimentação de <span>Estoque</span></h1>
+  </div>
+
+  <!-- Formulário de Nova Movimentação -->
+  <section class="mov-card">
+    <h2 class="mov-card__titulo">
+      <span aria-hidden="true">🔄</span> Registrar Movimentação
+    </h2>
+    <form id="form-movimento" class="mov-form">
+      
+      <!-- Produto (Autocomplete via Datalist) -->
+      <div class="mov-form__grupo mov-form__grupo--largo">
+        <label for="mov-produto" class="mov-form__label mov-form__label--obrigatorio">Busca de Produto</label>
+        <input type="text" id="mov-produto" class="mov-form__input" required placeholder="Digite o nome ou EAN do produto..." list="lista-produtos" autocomplete="off">
+        <datalist id="lista-produtos">
+          <option value="Paracetamol 750mg - 7891000200030"></option>
+          <option value="Amoxicilina 500mg - 7891000200041"></option>
+          <option value="Ibuprofeno 400mg - 7891000200052"></option>
+          <option value="Dipirona 1g - 7891000200063"></option>
+        </datalist>
+      </div>
+
+      <div class="mov-form__grupo">
+        <label for="mov-tipo" class="mov-form__label mov-form__label--obrigatorio">Tipo de Movimento</label>
+        <select id="mov-tipo" class="mov-form__input" required>
+          <option value="">Selecione...</option>
+          <option value="ENTRADA">Entrada (+)</option>
+          <option value="SAIDA">Saída (-)</option>
+        </select>
+      </div>
+
+      <div class="mov-form__grupo">
+        <label for="mov-motivo" class="mov-form__label mov-form__label--obrigatorio">Motivo</label>
+        <select id="mov-motivo" class="mov-form__input" required>
+          <option value="">Selecione o motivo...</option>
+          <optgroup label="Motivos de Entrada">
+            <option value="COMPRA">Compra (Fornecedor)</option>
+            <option value="DEVOLUCAO">Devolução de Cliente</option>
+          </optgroup>
+          <optgroup label="Motivos de Saída">
+            <option value="USO_INTERNO">Uso Interno</option>
+            <option value="PERDA_DANO">Perda/Dano</option>
+            <option value="VENCIMENTO">Vencimento</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="mov-form__grupo">
+        <label for="mov-lote" class="mov-form__label mov-form__label--obrigatorio">Número do Lote</label>
+        <input type="text" id="mov-lote" class="mov-form__input" required placeholder="Ex: L-202305A">
+      </div>
+
+      <div class="mov-form__grupo">
+        <label for="mov-validade" class="mov-form__label mov-form__label--obrigatorio">Data de Validade</label>
+        <input type="date" id="mov-validade" class="mov-form__input" required>
+      </div>
+
+      <div class="mov-form__grupo">
+        <label for="mov-qtd" class="mov-form__label mov-form__label--obrigatorio">Quantidade</label>
+        <input type="number" id="mov-qtd" class="mov-form__input" required min="1" placeholder="Ex: 50">
+      </div>
+
+      <div class="mov-form__acoes">
+        <button type="submit" class="btn-primario" id="btn-salvar-movimento">
+          <span aria-hidden="true">✔</span> Confirmar Movimentação
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Histórico Recente de Movimentações -->
+  <section class="mov-card">
+    <h2 class="mov-card__titulo" style="margin-bottom: 20px;">Histórico Recente</h2>
+    <div class="mov-tabela-wrapper">
+      <table class="mov-tabela">
+        <thead>
+          <tr>
+            <th>Data / Hora</th>
+            <th>Produto</th>
+            <th>Tipo</th>
+            <th>Qtd</th>
+            <th>Lote</th>
+            <th>Responsável</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-historico-corpo">
+          <tr>
+            <td>14/10/2023 10:30</td>
+            <td>Paracetamol 750mg</td>
+            <td><span class="badge badge--entrada">Entrada (Compra)</span></td>
+            <td style="font-weight: bold; color: #1e8449;">+ 50</td>
+            <td>L-202305A</td>
+            <td>Admin</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script src="pages/movimentos.js"></script>

@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="pages/configuracoes.css">
+
+<div class="config-pagina">
+  <div class="config-pagina__topo">
+    <h1 class="config-pagina__titulo">Configurações do <span>Sistema</span></h1>
+  </div>
+
+  <div class="config-card">
+    <h2 class="config-card__titulo">
+      <span aria-hidden="true">⚙️</span> Regras de Alerta e Inventário
+    </h2>
+    <form id="form-configuracoes" class="config-form">
+      
+      <div class="config-form__grupo">
+        <label for="config-aviso-vencimento" class="config-form__label config-form__label--obrigatorio">Aviso de Vencimento</label>
+        <select id="config-aviso-vencimento" class="config-form__input" required>
+          <option value="" disabled>Selecione a antecedência...</option>
+          <option value="15">15 dias de antecedência</option>
+          <option value="30" selected>30 dias de antecedência</option>
+          <option value="60">60 dias de antecedência</option>
+          <option value="90">90 dias de antecedência</option>
+        </select>
+        <small class="config-form__dica">Define quando os produtos aparecerão na tela de 'Alertas de Inventário'.</small>
+      </div>
+
+      <div class="config-form__grupo">
+        <label for="config-estoque-minimo" class="config-form__label config-form__label--obrigatorio">Estoque Mínimo Global (%)</label>
+        <input type="number" id="config-estoque-minimo" class="config-form__input" required min="1" max="100" value="20">
+        <small class="config-form__dica">Porcentagem padrão que aciona o alerta de reposição de estoque baixo.</small>
+      </div>
+
+      <div class="config-form__acoes">
+        <button type="submit" class="btn-primario" id="btn-salvar-config">
+          <span aria-hidden="true">💾</span> Salvar Preferências
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="pages/configuracoes.js"></script>

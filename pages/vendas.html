@@ -1,0 +1,115 @@
+<link rel="stylesheet" href="pages/vendas.css">
+
+<div class="pdv-pagina">
+  
+  <!-- LADO ESQUERDO: Busca e Carrinho -->
+  <div class="pdv-esquerda">
+    <div class="pdv-card pdv-card--busca pdv-no-print">
+      <div class="pdv-busca-wrapper">
+        <label for="pdv-busca" class="visualmente-oculto">Buscar Produto</label>
+        <span class="pdv-busca-icone" aria-hidden="true">🔍</span>
+        <input type="text" id="pdv-busca" class="pdv-input pdv-input--grande" placeholder="Bipar Código de Barras (EAN) ou digitar Nome do Produto..." list="pdv-produtos-mock" autocomplete="off" autofocus>
+        <datalist id="pdv-produtos-mock">
+          <option value="7891000200030">Paracetamol 750mg - R$ 12,50</option>
+          <option value="7891000200041">Amoxicilina 500mg - R$ 25,00</option>
+          <option value="7891000200052">Ibuprofeno 400mg - R$ 18,90</option>
+          <option value="7891000200063">Dipirona 1g - R$ 8,50</option>
+          <option value="7891000200074">Vitamina C - R$ 15,00</option>
+        </datalist>
+      </div>
+    </div>
+
+    <div class="pdv-card pdv-card--carrinho pdv-no-print">
+      <h2 class="pdv-titulo-secao">Itens da Venda</h2>
+      <div class="pdv-tabela-wrapper">
+        <table class="pdv-tabela">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th style="width: 80px; text-align: center;">Qtd</th>
+              <th style="width: 120px; text-align: right;">Preço Un.</th>
+              <th style="width: 120px; text-align: right;">Subtotal</th>
+              <th style="width: 60px; text-align: center;">Ação</th>
+            </tr>
+          </thead>
+          <tbody id="pdv-carrinho-corpo">
+            <!-- Itens inseridos via JS -->
+            <tr id="pdv-carrinho-vazio">
+              <td colspan="5" style="text-align: center; color: #888; padding: 40px 0;">
+                Nenhum item adicionado à venda.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- LADO DIREITO: Resumo e Fechamento -->
+  <div class="pdv-direita pdv-no-print">
+    <div class="pdv-card pdv-card--resumo">
+      
+      <div class="pdv-grupo">
+        <label for="pdv-cpf" class="pdv-label">CPF do Cliente (Opcional)</label>
+        <input type="text" id="pdv-cpf" class="pdv-input" placeholder="000.000.000-00">
+      </div>
+
+      <hr class="pdv-divisor">
+
+      <div class="pdv-resumo-linha">
+        <span class="pdv-resumo-texto">Subtotal:</span>
+        <span class="pdv-resumo-valor" id="pdv-subtotal">R$ 0,00</span>
+      </div>
+
+      <div class="pdv-grupo pdv-grupo--desconto">
+        <label for="pdv-desconto-valor" class="pdv-label">Desconto</label>
+        <div class="pdv-desconto-controles">
+          <select id="pdv-desconto-tipo" class="pdv-input pdv-input--curto">
+            <option value="R$">R$</option>
+            <option value="%">%</option>
+          </select>
+          <input type="number" id="pdv-desconto-valor" class="pdv-input" min="0" step="0.01" placeholder="0.00">
+        </div>
+      </div>
+
+      <div class="pdv-resumo-linha pdv-resumo-linha--total">
+        <span class="pdv-resumo-texto">TOTAL:</span>
+        <span class="pdv-resumo-total" id="pdv-total">R$ 0,00</span>
+      </div>
+
+      <div class="pdv-acoes">
+        <button id="btn-pdv-finalizar" class="btn-pdv btn-pdv--sucesso">
+          FINALIZAR VENDA (F2)
+        </button>
+        <button id="btn-pdv-cancelar" class="btn-pdv btn-pdv--perigo">
+          CANCELAR (ESC)
+        </button>
+        <button id="btn-pdv-imprimir" class="btn-pdv btn-pdv--secundario" disabled>
+          🖨️ Imprimir Comprovante
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RECIBO OCULTO (Apenas para Impressão) -->
+  <div id="pdv-recibo-print" class="pdv-recibo-print">
+    <div class="recibo-cabecalho">
+      <h3>FARMÁCIA PHARMASTOCK</h3>
+      <p>CNPJ: 12.345.678/0001-90</p>
+      <p>Comprovante Não Fiscal</p>
+      <p id="recibo-data"></p>
+    </div>
+    <hr>
+    <div id="recibo-itens" class="recibo-itens"></div>
+    <hr>
+    <div class="recibo-totais">
+      <p>Subtotal: <span id="recibo-subtotal"></span></p>
+      <p>Desconto: <span id="recibo-desconto"></span></p>
+      <h4>TOTAL: <span id="recibo-total"></span></h4>
+    </div>
+  </div>
+
+</div>
+
+<script src="pages/vendas.js"></script>

@@ -1,0 +1,184 @@
+<!-- ============================================================
+  pages/clientes.html
+  Miolo injetado pelo roteador — sem <html>, <head> nem <body>.
+  Requisitos cobertos: RF-C01, RF-C02, RF-C03, RF-C04, RF-C05
+============================================================ -->
+
+<link rel="stylesheet" href="pages/clientes.css">
+
+<article class="cli-pagina" aria-labelledby="titulo-clientes">
+
+  <!-- Topo: título + botão de novo cadastro -->
+  <header class="cli-pagina__topo">
+    <h2 class="cli-pagina__titulo" id="titulo-clientes">
+      Cadastro de <span>Clientes</span>
+    </h2>
+    <button class="btn-primario" id="btn-novo-cliente" aria-expanded="false" aria-controls="form-cliente">
+      <span aria-hidden="true">＋</span> Novo Cliente
+    </button>
+  </header>
+
+  <!-- ── Formulário de cadastro / edição (RF-C01, RF-C02, RF-C04) -->
+  <section
+    class="cli-card"
+    id="form-cliente"
+    aria-label="Formulário de cadastro de cliente"
+    hidden
+  >
+    <h3 class="cli-card__titulo">
+      <span aria-hidden="true">📝</span>
+      <span id="form-cliente__modo-titulo">Novo Cliente</span>
+    </h3>
+
+    <form class="cli-form" id="form-cli" novalidate>
+
+      <!-- RF-C01: Nome -->
+      <div class="cli-form__grupo">
+        <label class="cli-form__label cli-form__label--obrigatorio" for="cli-nome">
+          Nome completo
+        </label>
+        <input type="text" id="cli-nome" name="nome" class="cli-form__input" placeholder="Ex: João da Silva" required autocomplete="name">
+      </div>
+
+      <!-- RF-C01: CPF -->
+      <div class="cli-form__grupo">
+        <label class="cli-form__label cli-form__label--obrigatorio" for="cli-cpf">
+          CPF
+        </label>
+        <input type="text" id="cli-cpf" name="cpf" class="cli-form__input" placeholder="000.000.000-00" maxlength="14" required>
+      </div>
+
+      <!-- RF-C01: Data de Nascimento -->
+      <div class="cli-form__grupo">
+        <label class="cli-form__label cli-form__label--obrigatorio" for="cli-nascimento">
+          Data de Nascimento
+        </label>
+        <input type="date" id="cli-nascimento" name="nascimento" class="cli-form__input" required>
+      </div>
+
+      <!-- RF-C01: E-mail -->
+      <div class="cli-form__grupo">
+        <label class="cli-form__label" for="cli-email">
+          E-mail
+        </label>
+        <input type="email" id="cli-email" name="email" class="cli-form__input" placeholder="Ex: joao.silva@email.com" autocomplete="email">
+      </div>
+
+      <!-- RF-C01: Telefone -->
+      <div class="cli-form__grupo">
+        <label class="cli-form__label cli-form__label--obrigatorio" for="cli-telefone">
+          Telefone
+        </label>
+        <input type="tel" id="cli-telefone" name="telefone" class="cli-form__input" placeholder="(00) 00000-0000" maxlength="15" required>
+      </div>
+
+      <!-- RF-C01: Endereço -->
+      <div class="cli-form__grupo cli-form__grupo--largo">
+        <label class="cli-form__label" for="cli-endereco">
+          Endereço
+        </label>
+        <textarea id="cli-endereco" name="endereco" class="cli-form__textarea" placeholder="Ex: Rua das Flores, 123, Bairro, Cidade - UF" rows="3"></textarea>
+      </div>
+
+      <!-- RF-C04: Medicamentos de Uso Contínuo -->
+      <div class="cli-form__grupo cli-form__grupo--largo">
+        <label class="cli-form__label" for="cli-uso-continuo">
+          Medicamentos de Uso Contínuo (Anotações)
+        </label>
+        <textarea id="cli-uso-continuo" name="usoContinuo" class="cli-form__textarea" placeholder="Ex: Losartana 50mg (1x ao dia), AAS 100mg (1x ao dia)" rows="3"></textarea>
+      </div>
+
+      <!-- Ações do formulário -->
+      <div class="cli-form__acoes">
+        <button type="button" class="btn-perigo" id="btn-status-cliente" style="margin-right: auto;" hidden>
+          Inativar Cliente
+        </button>
+        <button type="button" class="btn-secundario" id="btn-cancelar-form">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primario">
+          <span aria-hidden="true">💾</span> Salvar Cliente
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ── Tabela de clientes cadastrados (RF-C03, RF-C05) ─── -->
+  <section class="cli-card" aria-label="Lista de clientes">
+    <h3 class="cli-card__titulo">
+      <span aria-hidden="true">👥</span> Clientes Cadastrados
+    </h3>
+
+    <!-- RF-C03: Consulta por Nome ou CPF -->
+    <div class="cli-card__filtro">
+        <label for="filtro-clientes" class="visualmente-oculto">Buscar cliente por nome ou CPF</label>
+        <input type="search" id="filtro-clientes" class="cli-card__filtro-input" placeholder="🔎 Buscar por Nome ou CPF...">
+    </div>
+
+    <div class="cli-tabela-wrapper">
+      <table class="cli-tabela" aria-label="Tabela de clientes">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 40px; text-align: center;"></th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-clientes-corpo">
+          <!-- Linha de exemplo 1 — será substituída por dados reais -->
+          <tr>
+            <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
+            <td>Mariana Costa</td>
+            <td>123.456.789-00</td>
+            <td>(11) 99876-5432</td>
+            <td><span class="badge badge--ativo">Ativo</span></td>
+            <td>
+              <div class="cli-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" aria-label="Editar Mariana Costa">Editar</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="linha-detalhes" hidden>
+            <td colspan="6">
+              <div class="detalhes-conteudo">
+                <p><strong>E-mail:</strong> mariana.costa@email.com</p>
+                <p><strong>Data de Nasc:</strong> 15/04/1985</p>
+                <p><strong>Endereço:</strong> Rua das Flores, 123, Bairro Jardim, São Paulo - SP</p>
+                <p><strong>Uso Contínuo:</strong> Losartana 50mg (1x ao dia), AAS 100mg (1x ao dia)</p>
+              </div>
+            </td>
+          </tr>
+          <!-- Linha de exemplo 2 — será substituída por dados reais -->
+          <tr>
+            <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
+            <td>Roberto Almeida</td>
+            <td>098.765.432-10</td>
+            <td>(21) 98765-1234</td>
+            <td><span class="badge badge--inativo">Inativo</span></td>
+            <td>
+              <div class="cli-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" aria-label="Editar Roberto Almeida">Editar</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="linha-detalhes" hidden>
+            <td colspan="6">
+              <div class="detalhes-conteudo">
+                <p><strong>E-mail:</strong> roberto.alm@email.com</p>
+                <p><strong>Data de Nasc:</strong> 22/10/1978</p>
+                <p><strong>Endereço:</strong> Av. Principal, 400, Apto 12, Rio de Janeiro - RJ</p>
+                <p><strong>Uso Contínuo:</strong> Nenhum medicamento cadastrado.</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</article>
+<script src="pages/clientes.js"></script>

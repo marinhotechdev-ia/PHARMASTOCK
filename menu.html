@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PharmaStock</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="menu_style.css" />
+</head>
+<body>
+
+  <header class="cabecalho" role="banner">
+    <div class="cabecalho__esquerda">
+      <span class="cabecalho__titulo">PHARMASTOCK</span>
+      <img src="assets/logo.png" alt="Logo PharmaStock" class="cabecalho__logo">
+    </div>
+
+    <div class="cabecalho__centro">
+      <div class="cabecalho__pesquisa-wrapper">
+        <label for="campo-pesquisa" class="visualmente-oculto">Pesquisar recurso</label>
+        <input
+          type="search"
+          id="campo-pesquisa"
+          class="cabecalho__pesquisa"
+          placeholder="INFORME O RECURSO DA PESQUISA"
+          autocomplete="off"
+        >
+        <span class="cabecalho__pesquisa-icone" aria-hidden="true">🔍</span>
+      </div>
+    </div>
+
+    <div class="cabecalho__direita">
+      <button class="cabecalho__icone-btn" title="Alternar modo noturno" aria-label="Alternar modo noturno">
+        🌙
+      </button>
+      <button class="cabecalho__icone-btn" title="Notificações" aria-label="Notificações com novas mensagens">
+        <span class="notificacao-bolinha" aria-hidden="true"></span>
+        🔔
+      </button>
+      <div class="perfil-container" id="perfil-container">
+        <div class="perfil-info" id="btn-perfil" tabindex="0" role="button" aria-expanded="false" aria-label="Menu do usuário">
+          <span class="cabecalho__usuario-nome" aria-label="Usuário logado">OLÁ ADMIN!</span>
+          <img src="assets/icone.png" alt="Avatar do usuário" class="cabecalho__avatar-usuario">
+        </div>
+        
+        <!-- Menu Dropdown -->
+        <div class="perfil-dropdown" id="perfil-dropdown" hidden>
+          <ul class="perfil-dropdown__lista">
+            <li>
+              <button class="perfil-dropdown__btn">
+                <span class="perfil-dropdown__icone" aria-hidden="true">🎧</span>
+                Atendimento
+              </button>
+            </li>
+            <li>
+              <button class="perfil-dropdown__btn">
+                <span class="perfil-dropdown__icone" aria-hidden="true">❓</span>
+                Ajuda
+              </button>
+            </li>
+            <li class="perfil-dropdown__separador"></li>
+            <li>
+              <button class="perfil-dropdown__btn perfil-dropdown__btn--sair" id="btn-logoff">
+                <span class="perfil-dropdown__icone" aria-hidden="true">🚪</span>
+                Sair do Sistema
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <nav class="menu-lateral" aria-label="Menu principal">
+      <h2 class="menu-lateral__titulo">MENU PRINCIPAL</h2>
+
+      <ul class="menu-lateral__lista">
+
+        <!-- Cadastros: tem submenu pois agrupa múltiplas entidades (RF-C, RF-F, RF-E, RF-L, RF-U) -->
+        <li class="menu-lateral__item">
+          <button
+            class="menu-lateral__btn"
+            aria-expanded="false"
+            aria-controls="submenu-cadastros"
+          >
+            <span class="menu-lateral__icone" aria-hidden="true">📄</span>
+            Cadastros
+          </button>
+          <ul class="submenu" id="submenu-cadastros" aria-label="Submenu de Cadastros">
+            <li><a href="#" class="submenu__link" data-pagina="clientes">Clientes</a></li>
+            <li><a href="#" class="submenu__link" data-pagina="funcionarios">Funcionários</a></li>
+            <li><a href="#" class="submenu__link" data-pagina="fornecedores">Fornecedores</a></li>
+            <li><a href="#" class="submenu__link" data-pagina="laboratorios">Laboratórios</a></li>
+            <li><a href="#" class="submenu__link" data-pagina="farmacia">Dados da Farmácia</a></li>
+          </ul>
+        </li>
+
+        <!-- Estoque: catálogo de produtos, lotes e validades (RF-P, RF-S) -->
+        <li class="menu-lateral__item">
+          <button class="menu-lateral__btn" data-pagina="estoque">
+            <span class="menu-lateral__icone" aria-hidden="true">📦</span>
+            Estoque
+          </button>
+        </li>
+
+        <!-- Movimentos: entradas de compra e saídas manuais (RF-S01, RF-S03) -->
+        <li class="menu-lateral__item">
+          <button class="menu-lateral__btn" data-pagina="movimentos">
+            <span class="menu-lateral__icone" aria-hidden="true">🔄</span>
+            Movimentos
+          </button>
+        </li>
+
+        <!-- Vendas: módulo próprio de venda com FEFO e comprovante (RF-V01 a RF-V05) -->
+        <li class="menu-lateral__item">
+          <button class="menu-lateral__btn" data-pagina="vendas">
+            <span class="menu-lateral__icone" aria-hidden="true">🛒</span>
+            Vendas
+          </button>
+        </li>
+
+        <!-- Alertas: validade próxima e stock baixo (RF-A01, RF-A02) -->
+        <li class="menu-lateral__item">
+          <button class="menu-lateral__btn" data-pagina="alertas">
+            <span class="menu-lateral__icone" aria-hidden="true">🔔</span>
+            Alertas
+          </button>
+        </li>
+
+        <!-- Relatórios: movimentação financeira, inventário físico e dashboard (RF-R01 a RF-R03) -->
+        <li class="menu-lateral__item">
+          <button class="menu-lateral__btn" data-pagina="relatorios">
+            <span class="menu-lateral__icone" aria-hidden="true">📊</span>
+            Relatórios
+          </button>
+        </li>
+
+        <!-- Configurações: parâmetros globais e perfis de acesso (RF-U03, RF-F02) -->
+        <li class="menu-lateral__item">
+          <button class="menu-lateral__btn" data-pagina="configuracoes">
+            <span class="menu-lateral__icone" aria-hidden="true">⚙️</span>
+            Configurações
+          </button>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <main class="conteudo-principal" id="conteudo-principal">
+      <section class="conteudo-principal__area" aria-label="Área de conteúdo">
+        <!-- Conteúdo dinâmico aqui -->
+      </section>
+      <div class="conteudo-principal__onda" aria-hidden="true"></div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

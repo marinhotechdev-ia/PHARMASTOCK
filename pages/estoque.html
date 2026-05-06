@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="pages/estoque.css">
+
+<div class="estq-pagina">
+  <div class="estq-pagina__topo">
+    <h1 class="estq-pagina__titulo">Gestão de <span>Estoque / Produtos</span></h1>
+    <button class="btn-primario" id="btn-novo-produto" aria-expanded="false">
+      <span aria-hidden="true">➕</span> Novo Produto
+    </button>
+  </div>
+
+  <!-- Formulário de Produto (Oculto por padrão) -->
+  <section id="form-produto-section" class="estq-card" hidden>
+    <h2 class="estq-card__titulo" id="form-produto__modo-titulo">Novo Produto</h2>
+    <form id="form-prod" class="estq-form">
+      
+      <!-- RF-P01: Dados Básicos -->
+      <div class="estq-form__grupo">
+        <label for="prod-nome" class="estq-form__label estq-form__label--obrigatorio">Nome Comercial</label>
+        <input type="text" id="prod-nome" class="estq-form__input" required placeholder="Ex: Paracetamol 750mg">
+      </div>
+
+      <div class="estq-form__grupo">
+        <label for="prod-ativo" class="estq-form__label">Princípio Ativo</label>
+        <input type="text" id="prod-ativo" class="estq-form__input" placeholder="Ex: Paracetamol">
+      </div>
+
+      <div class="estq-form__grupo">
+        <label for="prod-ean" class="estq-form__label estq-form__label--obrigatorio">Código de Barras (EAN)</label>
+        <input type="text" id="prod-ean" class="estq-form__input" required placeholder="Ex: 7891234567890">
+      </div>
+
+      <div class="estq-form__grupo">
+        <label for="prod-categoria" class="estq-form__label estq-form__label--obrigatorio">Categoria</label>
+        <select id="prod-categoria" class="estq-form__input" required>
+          <option value="">Selecione...</option>
+          <option value="Genérico">Genérico</option>
+          <option value="Referência">Referência</option>
+          <option value="Similar">Similar</option>
+          <option value="Cosmético">Cosmético</option>
+          <option value="Higiene">Higiene Pessoal</option>
+        </select>
+      </div>
+
+      <!-- RF-P02: Vincular Laboratório -->
+      <div class="estq-form__grupo">
+        <label for="prod-laboratorio" class="estq-form__label estq-form__label--obrigatorio">Fabricante / Laboratório</label>
+        <select id="prod-laboratorio" class="estq-form__input" required>
+          <option value="">Selecione um Laboratório...</option>
+          <option value="Medley">Medley</option>
+          <option value="Eurofarma">Eurofarma</option>
+          <option value="Neo Química">Neo Química</option>
+          <option value="Bayer">Bayer</option>
+        </select>
+      </div>
+
+      <!-- RF-P01 e RF-P05: Medidas, Preço e Estoque Mínimo -->
+      <div class="estq-form__grupo">
+        <label for="prod-unidade" class="estq-form__label estq-form__label--obrigatorio">Unidade de Medida</label>
+        <select id="prod-unidade" class="estq-form__input" required>
+          <option value="">Selecione...</option>
+          <option value="Caixa">Caixa</option>
+          <option value="Frasco">Frasco</option>
+          <option value="Comprimido">Comprimido (Unid)</option>
+          <option value="Ampola">Ampola</option>
+        </select>
+      </div>
+
+      <div class="estq-form__grupo">
+        <label for="prod-preco" class="estq-form__label estq-form__label--obrigatorio">Preço de Venda (R$)</label>
+        <input type="number" id="prod-preco" class="estq-form__input" required step="0.01" min="0" placeholder="0.00">
+      </div>
+
+      <div class="estq-form__grupo">
+        <label for="prod-minimo" class="estq-form__label estq-form__label--obrigatorio">Estoque Mínimo (Alerta)</label>
+        <input type="number" id="prod-minimo" class="estq-form__input" required min="1" placeholder="Ex: 10">
+      </div>
+
+      <div class="estq-form__acoes">
+        <button type="button" class="btn-secundario" id="btn-cancelar-form">Cancelar</button>
+        <button type="button" class="btn-perigo" id="btn-status-produto" hidden>Inativar Produto</button>
+        <button type="submit" class="btn-primario">Salvar Produto</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Filtros e Listagem (RF-P04) -->
+  <div class="estq-card">
+    <div class="estq-card__topo-tabela">
+      <h2 class="estq-card__titulo" style="margin-bottom: 0; border: none;">Catálogo de Produtos</h2>
+      <div class="estq-filtros">
+        <input type="text" id="filtro-nome" class="estq-form__input" placeholder="Buscar por Nome ou EAN...">
+        <select id="filtro-categoria" class="estq-form__input">
+          <option value="">Todas as Categorias</option>
+          <option value="Genérico">Genérico</option>
+          <option value="Referência">Referência</option>
+          <option value="Cosmético">Cosmético</option>
+        </select>
+        <select id="filtro-lab" class="estq-form__input">
+          <option value="">Todos os Laboratórios</option>
+          <option value="Medley">Medley</option>
+          <option value="Eurofarma">Eurofarma</option>
+          <option value="Bayer">Bayer</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="estq-tabela-wrapper">
+      <table class="estq-tabela">
+        <thead>
+          <tr>
+            <th>Produto / EAN</th>
+            <th>Categoria</th>
+            <th>Laboratório</th>
+            <th>Und</th>
+            <th>Preço (R$)</th>
+            <th>Estq. Atual / Min</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-produtos-corpo">
+          <!-- Linha 1 -->
+          <tr data-categoria="Genérico" data-lab="Medley">
+            <td>
+              <strong>Paracetamol 750mg</strong><br>
+              <small style="color: #666;">7891000200030</small>
+            </td>
+            <td>Genérico</td>
+            <td>Medley</td>
+            <td>Caixa</td>
+            <td>12.50</td>
+            <td><span style="color: #1e8449; font-weight: bold;">45</span> / 10</td>
+            <td><span class="badge badge--ativo">Ativo</span></td>
+            <td>
+              <div class="estq-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" style="padding: 4px 10px; font-size: 0.8rem;">Editar</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="pages/estoque.js"></script>

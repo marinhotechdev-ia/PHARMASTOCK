@@ -1,0 +1,136 @@
+<!-- ============================================================
+  pages/laboratorios.html
+  Miolo injetado pelo roteador — sem <html>, <head> nem <body>.
+  Requisitos cobertos: RF-L01, RF-L03
+============================================================ -->
+
+<link rel="stylesheet" href="pages/laboratorios.css?v=1">
+
+<article class="lab-pagina" aria-labelledby="titulo-laboratorios">
+
+  <!-- Topo: título + botão de novo cadastro -->
+  <header class="lab-pagina__topo">
+    <h2 class="lab-pagina__titulo" id="titulo-laboratorios">
+      Cadastro de <span>Laboratórios</span>
+    </h2>
+    <button class="btn-primario" id="btn-novo-laboratorio" aria-expanded="false" aria-controls="form-laboratorio">
+      <span aria-hidden="true">＋</span> Novo Laboratório
+    </button>
+  </header>
+
+  <!-- ── Formulário de cadastro / edição (RF-L01, RF-L03) -->
+  <section
+    class="lab-card"
+    id="form-laboratorio"
+    aria-label="Formulário de cadastro de laboratório"
+    hidden
+  >
+    <h3 class="lab-card__titulo">
+      <span aria-hidden="true">🔬</span>
+      <span id="form-laboratorio__modo-titulo">Novo Laboratório</span>
+    </h3>
+
+    <form class="lab-form" id="form-lab" novalidate>
+
+      <!-- RF-L01: Nome -->
+      <div class="lab-form__grupo">
+        <label class="lab-form__label lab-form__label--obrigatorio" for="lab-nome">
+          Nome do Fabricante / Laboratório
+        </label>
+        <input type="text" id="lab-nome" name="nome" class="lab-form__input" placeholder="Ex: Medley, EMS, Eurofarma" required>
+      </div>
+
+      <!-- RF-L01: CNPJ -->
+      <div class="lab-form__grupo">
+        <label class="lab-form__label lab-form__label--obrigatorio" for="lab-cnpj">
+          CNPJ
+        </label>
+        <input type="text" id="lab-cnpj" name="cnpj" class="lab-form__input" placeholder="00.000.000/0000-00" maxlength="18" required>
+      </div>
+
+      <!-- Ações do formulário -->
+      <div class="lab-form__acoes">
+        <button type="button" class="btn-perigo" id="btn-remover-lab" style="margin-right: auto;" hidden>
+          Excluir Laboratório
+        </button>
+        <button type="button" class="btn-secundario" id="btn-cancelar-form">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primario">
+          <span aria-hidden="true">💾</span> Salvar Laboratório
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ── Tabela de laboratórios cadastrados ─── -->
+  <section class="lab-card" aria-label="Lista de laboratórios">
+    <h3 class="lab-card__titulo">
+      <span aria-hidden="true">🏢</span> Laboratórios Cadastrados
+    </h3>
+
+    <!-- Filtro de busca -->
+    <div class="lab-card__filtro">
+        <label for="filtro-laboratorios" class="visualmente-oculto">Buscar laboratório</label>
+        <input type="search" id="filtro-laboratorios" class="lab-card__filtro-input" placeholder="🔎 Buscar por Nome ou CNPJ...">
+    </div>
+
+    <div class="lab-tabela-wrapper">
+      <table class="lab-tabela" aria-label="Tabela de laboratórios">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 40px; text-align: center;"></th>
+            <th scope="col">Nome do Laboratório</th>
+            <th scope="col">CNPJ</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-laboratorios-corpo">
+          
+          <!-- Linha de exemplo 1 -->
+          <tr>
+            <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
+            <td>Medley Farmacêutica</td>
+            <td>50.929.710/0001-79</td>
+            <td>
+              <div class="lab-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" aria-label="Editar Medley">Editar</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="linha-detalhes" hidden>
+            <td colspan="4">
+              <div class="detalhes-conteudo">
+                <p><strong>Produtos Vinculados:</strong> 45 medicamentos cadastrados no estoque.</p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Linha de exemplo 2 (Vazia para testar exclusão RF-L03) -->
+          <tr>
+            <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
+            <td>Eurofarma Laboratórios</td>
+            <td>61.190.096/0001-92</td>
+            <td>
+              <div class="lab-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" aria-label="Editar Eurofarma">Editar</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="linha-detalhes" hidden>
+            <td colspan="4">
+              <div class="detalhes-conteudo">
+                <p><strong>Produtos Vinculados:</strong> Nenhum produto vinculado.</p>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</article>
+
+<script src="pages/laboratorios.js"></script>

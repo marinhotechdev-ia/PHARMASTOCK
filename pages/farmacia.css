@@ -1,0 +1,92 @@
+/* ── Escopo visual da página de Dados da Farmácia ────────────────── */
+
+.farm-pagina {
+  padding: 32px 40px;
+  font-family: var(--fonte-principal, 'Montserrat', Arial, sans-serif);
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Cabeçalho da página */
+.farm-pagina__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.farm-pagina__titulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #08223a;
+}
+
+.farm-pagina__titulo span {
+  color: #00b4e6;
+}
+
+/* Botões (reaproveitados do padrão) */
+.btn-primario { background: #00b4e6; color: #fff; border: none; border-radius: 20px; padding: 10px 24px; font-size: 1rem; font-family: var(--fonte-principal, 'Montserrat', Arial, sans-serif); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.2s; }
+.btn-primario:hover { background: #0099c7; }
+
+/* ── Card branco ──────────────────────── */
+.farm-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+}
+
+.farm-card__titulo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #08223a;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e8f8fd;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.farm-card__subtitulo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #08223a;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #d0eefa;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Grade do formulário ─────────────────────────────────────── */
+.farm-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 28px;
+}
+
+.farm-form__grupo--largo { grid-column: 1 / -1; }
+.farm-form__grupo { display: flex; flex-direction: column; gap: 6px; }
+.farm-form__label { font-size: 0.8rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+.farm-form__label--obrigatorio::after { content: ' *'; color: #c0392b; }
+
+.farm-form__input {
+  padding: 10px 14px;
+  border: 1.5px solid #d0d0d0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: var(--fonte-principal, 'Montserrat', Arial, sans-serif);
+  color: #222;
+  background: #f9f9f9;
+  transition: border-color 0.2s, background 0.2s;
+  outline: none;
+}
+
+.farm-form__input:focus { border-color: #00b4e6; background: #fff; }
+.farm-form__input[type="file"] { padding: 7px 14px; background: #fff; }
+
+.farm-form__acoes { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px; }

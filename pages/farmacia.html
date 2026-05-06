@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="pages/farmacia.css">
+
+<div class="farm-pagina">
+  <div class="farm-pagina__topo">
+    <h1 class="farm-pagina__titulo">Dados da <span>Farmácia</span></h1>
+  </div>
+
+  <div class="farm-card">
+    <h2 class="farm-card__titulo">
+      <span aria-hidden="true">🏢</span> Informações da Unidade
+    </h2>
+    <form id="form-farmacia" class="farm-form">
+      
+      <!-- Seção: Dados Básicos (RF-U01 e RF-U02) -->
+      <div class="farm-form__grupo">
+        <label for="farm-razao" class="farm-form__label farm-form__label--obrigatorio">Razão Social</label>
+        <input type="text" id="farm-razao" class="farm-form__input" required placeholder="Ex: Farmácia Saúde & Vida LTDA">
+      </div>
+
+      <div class="farm-form__grupo">
+        <label for="farm-fantasia" class="farm-form__label farm-form__label--obrigatorio">Nome Fantasia</label>
+        <input type="text" id="farm-fantasia" class="farm-form__input" required placeholder="Ex: PharmaStock">
+      </div>
+
+      <div class="farm-form__grupo">
+        <label for="farm-cnpj" class="farm-form__label farm-form__label--obrigatorio">CNPJ</label>
+        <input type="text" id="farm-cnpj" class="farm-form__input" required placeholder="00.000.000/0000-00">
+      </div>
+
+      <div class="farm-form__grupo">
+        <label for="farm-ie" class="farm-form__label">Inscrição Estadual</label>
+        <input type="text" id="farm-ie" class="farm-form__input" placeholder="Ex: 123.456.789.000">
+      </div>
+
+      <div class="farm-form__grupo">
+        <label for="farm-telefone" class="farm-form__label farm-form__label--obrigatorio">Telefone de Contato</label>
+        <input type="tel" id="farm-telefone" class="farm-form__input" required placeholder="(00) 00000-0000">
+      </div>
+
+      <div class="farm-form__grupo">
+        <label for="farm-logo" class="farm-form__label">Logotipo (URL ou Arquivo)</label>
+        <input type="file" id="farm-logo" class="farm-form__input" accept="image/*">
+      </div>
+
+      <div class="farm-form__grupo farm-form__grupo--largo">
+        <label for="farm-endereco" class="farm-form__label farm-form__label--obrigatorio">Endereço Completo</label>
+        <input type="text" id="farm-endereco" class="farm-form__input" required placeholder="Rua, Número, Bairro, Cidade - UF">
+      </div>
+
+      <div class="farm-form__acoes">
+        <button type="submit" class="btn-primario" id="btn-salvar-farmacia">
+          <span aria-hidden="true">💾</span> Salvar Configurações
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script src="pages/farmacia.js"></script>

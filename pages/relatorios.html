@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="pages/relatorios.css">
+
+<div class="rel-pagina" id="rel-area-impressao">
+  
+  <!-- Cabeçalho -->
+  <div class="rel-pagina__topo rel-no-print">
+    <h1 class="rel-pagina__titulo">Relatórios <span>Gerenciais</span></h1>
+    <button class="btn-primario" id="btn-rel-exportar" disabled>
+      <span aria-hidden="true">🖨️</span> Exportar para PDF
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="rel-card rel-no-print">
+    <form id="form-relatorios" class="rel-filtros">
+      <div class="rel-form__grupo">
+        <label for="rel-data-inicio" class="rel-form__label">Data Início</label>
+        <input type="date" id="rel-data-inicio" class="rel-form__input" required>
+      </div>
+      <div class="rel-form__grupo">
+        <label for="rel-data-fim" class="rel-form__label">Data Fim</label>
+        <input type="date" id="rel-data-fim" class="rel-form__input" required>
+      </div>
+      <div class="rel-form__grupo">
+        <label for="rel-tipo" class="rel-form__label">Tipo de Relatório</label>
+        <select id="rel-tipo" class="rel-form__input" required>
+          <option value="vendas">Relatório Financeiro (Vendas e Despesas)</option>
+          <option value="movimentacao">Movimentação de Estoque</option>
+          <option value="validade">Controle de Validade</option>
+        </select>
+      </div>
+      <div class="rel-form__acoes">
+        <button type="submit" class="btn-secundario" id="btn-gerar-relatorio">Gerar Relatório</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- KPIs / Resumo -->
+  <div class="rel-kpis" id="rel-container-kpis" hidden>
+    <div class="rel-kpi-card rel-kpi-card--entrada">
+      <h3 class="rel-kpi__titulo">Total de Entradas</h3>
+      <p class="rel-kpi__valor" id="kpi-entradas">-</p>
+    </div>
+    <div class="rel-kpi-card rel-kpi-card--saida">
+      <h3 class="rel-kpi__titulo">Total de Saídas</h3>
+      <p class="rel-kpi__valor" id="kpi-saidas">-</p>
+    </div>
+    <div class="rel-kpi-card rel-kpi-card--saldo">
+      <h3 class="rel-kpi__titulo" id="kpi-titulo-saldo">Saldo / Total</h3>
+      <p class="rel-kpi__valor" id="kpi-saldo">-</p>
+    </div>
+  </div>
+
+  <!-- Área Central: Tabela Dinâmica -->
+  <div class="rel-card rel-tabela-container" id="rel-container-tabela" hidden>
+    <h2 class="rel-titulo-tabela" id="rel-titulo-impressao">Relatório</h2>
+    <table class="rel-tabela">
+      <thead id="rel-tabela-head"></thead>
+      <tbody id="rel-tabela-corpo"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="pages/relatorios.js"></script>

@@ -1,0 +1,207 @@
+<!-- ============================================================
+  pages/fornecedores.html
+  Miolo injetado pelo roteador — sem <html>, <head> nem <body>.
+  Requisitos cobertos: RF-E01, RF-E02, RF-E03, RF-E04
+============================================================ -->
+
+<link rel="stylesheet" href="pages/fornecedores.css?v=1">
+
+<article class="forn-pagina" aria-labelledby="titulo-fornecedores">
+
+  <!-- Topo: título + botão de novo cadastro -->
+  <header class="forn-pagina__topo">
+    <h2 class="forn-pagina__titulo" id="titulo-fornecedores">
+      Cadastro de <span>Fornecedores</span>
+    </h2>
+    <button class="btn-primario" id="btn-novo-fornecedor" aria-expanded="false" aria-controls="form-fornecedor">
+      <span aria-hidden="true">＋</span> Novo Fornecedor
+    </button>
+  </header>
+
+  <!-- ── Formulário de cadastro / edição (RF-E01, RF-E02, RF-E03) -->
+  <section
+    class="forn-card"
+    id="form-fornecedor"
+    aria-label="Formulário de cadastro de fornecedor"
+    hidden
+  >
+    <h3 class="forn-card__titulo">
+      <span aria-hidden="true">🏢</span>
+      <span id="form-fornecedor__modo-titulo">Novo Fornecedor</span>
+    </h3>
+
+    <form class="forn-form" id="form-forn" novalidate>
+
+      <!-- RF-E01: Razão Social -->
+      <div class="forn-form__grupo forn-form__grupo--largo">
+        <label class="forn-form__label forn-form__label--obrigatorio" for="forn-razao">
+          Razão Social
+        </label>
+        <input type="text" id="forn-razao" name="razao" class="forn-form__input" placeholder="Ex: Distribuidora de Medicamentos Saúde Ltda" required>
+      </div>
+
+      <!-- RF-E01: Nome Fantasia -->
+      <div class="forn-form__grupo">
+        <label class="forn-form__label forn-form__label--obrigatorio" for="forn-fantasia">
+          Nome Fantasia
+        </label>
+        <input type="text" id="forn-fantasia" name="fantasia" class="forn-form__input" placeholder="Ex: Saúde Distribuidora" required>
+      </div>
+
+      <!-- RF-E01: CNPJ -->
+      <div class="forn-form__grupo">
+        <label class="forn-form__label forn-form__label--obrigatorio" for="forn-cnpj">
+          CNPJ
+        </label>
+        <input type="text" id="forn-cnpj" name="cnpj" class="forn-form__input" placeholder="00.000.000/0000-00" maxlength="18" required>
+      </div>
+
+      <!-- RF-E01: Inscrição Estadual -->
+      <div class="forn-form__grupo">
+        <label class="forn-form__label" for="forn-ie">
+          Inscrição Estadual (I.E.)
+        </label>
+        <input type="text" id="forn-ie" name="ie" class="forn-form__input" placeholder="Ex: 123.456.789.000">
+      </div>
+
+      <!-- RF-E01: Telefone de Vendas -->
+      <div class="forn-form__grupo">
+        <label class="forn-form__label forn-form__label--obrigatorio" for="forn-telefone">
+          Telefone de Vendas
+        </label>
+        <input type="tel" id="forn-telefone" name="telefone" class="forn-form__input" placeholder="(00) 0000-0000" maxlength="15" required>
+      </div>
+
+      <!-- RF-E01: E-mail de Pedidos -->
+      <div class="forn-form__grupo">
+        <label class="forn-form__label" for="forn-email">
+          E-mail de Pedidos
+        </label>
+        <input type="email" id="forn-email" name="email" class="forn-form__input" placeholder="vendas@empresa.com.br">
+      </div>
+
+      <!-- RF-E02: Representante (Nome) -->
+      <div class="forn-form__grupo">
+        <label class="forn-form__label" for="forn-rep-nome">
+          Nome do Representante
+        </label>
+        <input type="text" id="forn-rep-nome" name="repNome" class="forn-form__input" placeholder="Ex: Carlos Oliveira">
+      </div>
+
+      <!-- RF-E02: Representante (Contato) -->
+      <div class="forn-form__grupo">
+        <label class="forn-form__label" for="forn-rep-contato">
+          Contato do Representante
+        </label>
+        <input type="text" id="forn-rep-contato" name="repContato" class="forn-form__input" placeholder="(00) 00000-0000 ou E-mail">
+      </div>
+
+      <!-- RF-E03: Endereço Comercial -->
+      <div class="forn-form__grupo forn-form__grupo--largo">
+        <label class="forn-form__label" for="forn-endereco">
+          Endereço Comercial
+        </label>
+        <textarea id="forn-endereco" name="endereco" class="forn-form__textarea" placeholder="Ex: Av. das Indústrias, 500, Galpão 3 - São Paulo/SP" rows="2"></textarea>
+      </div>
+
+      <!-- Ações do formulário -->
+      <div class="forn-form__acoes">
+        <button type="button" class="btn-perigo" id="btn-status-fornecedor" style="margin-right: auto;" hidden>
+          Inativar Fornecedor
+        </button>
+        <button type="button" class="btn-secundario" id="btn-cancelar-form">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primario">
+          <span aria-hidden="true">💾</span> Salvar Fornecedor
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ── Tabela de fornecedores cadastrados (RF-E04) ─── -->
+  <section class="forn-card" aria-label="Lista de fornecedores">
+    <h3 class="forn-card__titulo">
+      <span aria-hidden="true">🚚</span> Fornecedores Cadastrados
+    </h3>
+
+    <!-- RF-E04: Consulta por Nome Fantasia ou CNPJ -->
+    <div class="forn-card__filtro">
+        <label for="filtro-fornecedores" class="visualmente-oculto">Buscar fornecedor por Fantasia ou CNPJ</label>
+        <input type="search" id="filtro-fornecedores" class="forn-card__filtro-input" placeholder="🔎 Buscar por Nome Fantasia ou CNPJ...">
+    </div>
+
+    <div class="forn-tabela-wrapper">
+      <table class="forn-tabela" aria-label="Tabela de fornecedores">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 40px; text-align: center;"></th>
+            <th scope="col">Nome Fantasia</th>
+            <th scope="col">CNPJ</th>
+            <th scope="col">Telefone (Vendas)</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-fornecedores-corpo">
+          
+          <!-- Linha de exemplo 1 -->
+          <tr>
+            <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
+            <td>MedFarma Distribuidora</td>
+            <td>12.345.678/0001-90</td>
+            <td>(11) 4002-8922</td>
+            <td><span class="badge badge--ativo">Ativo</span></td>
+            <td>
+              <div class="forn-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" aria-label="Editar MedFarma Distribuidora">Editar</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="linha-detalhes" hidden>
+            <td colspan="6">
+              <div class="detalhes-conteudo">
+                <p><strong>Razão Social:</strong> Distribuidora de Medicamentos MedFarma Ltda</p>
+                <p><strong>Inscrição Est.:</strong> 111.222.333.444</p>
+                <p><strong>E-mail de Pedidos:</strong> vendas@medfarma.com.br</p>
+                <p><strong>Endereço:</strong> Rodovia Anhanguera, Km 20, Galpão B, São Paulo - SP</p>
+                <p><strong>Representante:</strong> Roberto Carlos - (11) 99999-1234</p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Linha de exemplo 2 -->
+          <tr>
+            <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
+            <td>Laboratórios Vida</td>
+            <td>98.765.432/0001-10</td>
+            <td>(21) 3333-4444</td>
+            <td><span class="badge badge--inativo">Inativo</span></td>
+            <td>
+              <div class="forn-tabela__acoes">
+                <button class="btn-secundario" data-action="edit" aria-label="Editar Laboratórios Vida">Editar</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="linha-detalhes" hidden>
+            <td colspan="6">
+              <div class="detalhes-conteudo">
+                <p><strong>Razão Social:</strong> Vida Indústria Farmacêutica S.A</p>
+                <p><strong>Inscrição Est.:</strong> Isento</p>
+                <p><strong>E-mail de Pedidos:</strong> pedidos@vidafarma.com.br</p>
+                <p><strong>Endereço:</strong> Rua Industrial, 100, Distrito Industrial, Rio de Janeiro - RJ</p>
+                <p><strong>Representante:</strong> Mariana Luz - mariana@vidafarma.com.br</p>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</article>
+
+<!-- Script específico desta página -->
+<script src="pages/fornecedores.js"></script>

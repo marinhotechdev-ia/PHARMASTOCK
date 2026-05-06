@@ -1,0 +1,181 @@
+/* ── Escopo visual da página de PDV (Vendas) ────────────────────── */
+
+.pdv-pagina {
+  display: flex;
+  gap: 24px;
+  padding: 24px 32px;
+  height: 100%;
+  font-family: var(--fonte-principal, 'Montserrat', Arial, sans-serif);
+  background: #eef2f5;
+  overflow: hidden; /* Evita rolagem na página inteira, rola só o carrinho */
+}
+
+/* Colunas */
+.pdv-esquerda {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0; /* Previne overflow em flexbox */
+}
+
+.pdv-direita {
+  flex: 1;
+  min-width: 340px;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cards Base */
+.pdv-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+}
+
+.pdv-card--carrinho {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pdv-card--resumo {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Elementos de Busca */
+.pdv-busca-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pdv-busca-icone {
+  position: absolute;
+  left: 20px;
+  font-size: 1.5rem;
+  color: #888;
+  pointer-events: none;
+}
+
+.pdv-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #d0d0d0;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.pdv-input:focus { border-color: #00b4e6; }
+
+.pdv-input--grande {
+  padding-left: 56px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  height: 64px;
+}
+
+.pdv-input--curto { width: 80px; flex-shrink: 0; }
+
+/* Tabela do Carrinho */
+.pdv-titulo-secao {
+  font-size: 1.2rem;
+  color: #08223a;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.pdv-tabela-wrapper {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.pdv-tabela { width: 100%; border-collapse: collapse; }
+.pdv-tabela th { background: #f4f6f8; padding: 12px; text-align: left; font-size: 0.9rem; color: #555; position: sticky; top: 0; z-index: 1; }
+.pdv-tabela td { padding: 16px 12px; border-bottom: 1px solid #eee; vertical-align: middle; font-size: 1.05rem; color: #222; }
+.pdv-tabela tr:hover td { background: #fdfdfd; }
+
+/* Inputs dentro da tabela */
+.pdv-input-qtd { width: 60px; padding: 8px; text-align: center; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; font-weight: 600; }
+
+/* Painel Direito (Resumo) */
+.pdv-grupo { margin-bottom: 20px; }
+.pdv-label { display: block; font-size: 0.9rem; font-weight: 700; color: #555; margin-bottom: 8px; text-transform: uppercase; }
+.pdv-divisor { border: none; border-top: 2px dashed #ddd; margin: 24px 0; }
+
+.pdv-desconto-controles { display: flex; gap: 12px; }
+
+.pdv-resumo-linha { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.pdv-resumo-texto { font-size: 1.2rem; color: #555; font-weight: 600; }
+.pdv-resumo-valor { font-size: 1.4rem; color: #222; font-weight: 700; }
+
+.pdv-resumo-linha--total {
+  margin-top: auto; /* Empurra pro final do card */
+  padding-top: 24px;
+  border-top: 3px solid #08223a;
+}
+.pdv-resumo-linha--total .pdv-resumo-texto { font-size: 1.5rem; color: #08223a; font-weight: 800; }
+.pdv-resumo-total { font-size: 2.8rem; color: #1e8449; font-weight: 800; letter-spacing: -1px; }
+
+/* Botões de Ação (Agilidade) */
+.pdv-acoes { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+
+.btn-pdv {
+  width: 100%; padding: 18px; border: none; border-radius: 8px;
+  font-size: 1.2rem; font-weight: 800; text-transform: uppercase; cursor: pointer;
+  transition: transform 0.1s, filter 0.2s; font-family: inherit;
+}
+.btn-pdv:active { transform: scale(0.98); }
+.btn-pdv:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.btn-pdv--sucesso { background: #27ae60; color: #fff; box-shadow: 0 4px 0 #1e8449; }
+.btn-pdv--sucesso:hover:not(:disabled) { filter: brightness(1.1); }
+
+.btn-pdv--perigo { background: #e74c3c; color: #fff; box-shadow: 0 4px 0 #c0392b; font-size: 1rem; padding: 14px; }
+.btn-pdv--perigo:hover:not(:disabled) { filter: brightness(1.1); }
+
+.btn-pdv--secundario { background: #ecf0f1; color: #2c3e50; box-shadow: 0 4px 0 #bdc3c7; font-size: 1rem; padding: 14px; }
+.btn-pdv--secundario:hover:not(:disabled) { background: #dfe6e9; }
+
+/* Botão remover item */
+.btn-remover-item { background: none; border: none; color: #e74c3c; font-size: 1.5rem; cursor: pointer; padding: 4px; border-radius: 4px; }
+.btn-remover-item:hover { background: #fdecea; }
+
+/* ── Impressão de Recibo (Cupom Não Fiscal) ────────────────── */
+.pdv-recibo-print { display: none; }
+
+@media print {
+  /* Esconde TUDO da tela principal (Menu, Header, Cards do PDV) */
+  body * { visibility: hidden; }
+  
+  /* Exibe APENAS a div de recibo e seus filhos */
+  .pdv-recibo-print, .pdv-recibo-print * { visibility: visible; }
+  
+  .pdv-recibo-print {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300px; /* Largura típica de impressora térmica */
+    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada para cupons */
+    font-size: 12px;
+    color: #000;
+    padding: 10px;
+  }
+  
+  .recibo-cabecalho { text-align: center; margin-bottom: 10px; }
+  .recibo-cabecalho h3 { margin: 0 0 5px 0; font-size: 14px; }
+  .recibo-cabecalho p { margin: 2px 0; }
+  .recibo-itens { margin: 10px 0; }
+  .recibo-item-linha { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .recibo-totais { text-align: right; margin-top: 10px; }
+  .recibo-totais h4 { font-size: 14px; margin-top: 5px; }
+}

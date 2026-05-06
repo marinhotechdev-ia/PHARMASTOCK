@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmácia Stock</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container-login">
+        <aside class="side-bar">
+            <h1 class="logo-title">FARMÁCIA STOCK</h1>
+            <img src="assets/logo.png" alt="Logo da Farmácia" class="logo-img" style="border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+        </aside>
+        <section class="login-area">
+            <h2 class="welcome-title">BEM-VINDO!</h2>
+            <form class="login-form">
+                <div class="input-group">
+                    <label for="usuario" class="sr-only">Nome de usuário</label>
+                    <span class="input-icon user" aria-hidden="true"></span>
+                    <input type="text" id="usuario" placeholder="NOME DE USUÁRIO" required>
+                </div>
+                <div class="input-group">
+                    <label for="senha" class="sr-only">Senha</label>
+                    <span class="input-icon lock" aria-hidden="true"></span>
+                    <input type="password" id="senha" placeholder="SENHA" required>
+                    <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                        <span class="eye-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div id="erro-login" style="color: #ff4d4d; font-size: 0.85rem; text-align: center; margin-top: -5px; display: none; font-weight: 600;">Usuário ou senha incorretos!</div>
+                <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+            <a href="#" class="forgot-link">Esqueceu a senha?</a>
+        </section>
+    </main>
+    <script>
+        // Funcionalidade de mostrar/ocultar senha
+        const togglePassword = document.querySelector('.toggle-password');
+        const senhaInput = document.getElementById('senha');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = senhaInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            senhaInput.setAttribute('type', type);
+            // Efeito visual de opacidade no olho quando visível
+            this.style.opacity = type === 'text' ? '1' : '0.7';
+        });
+
+        // Autenticação básica
+        document.querySelector('.login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const usuario = document.getElementById('usuario').value.trim().toLowerCase();
+            const senha = senhaInput.value.trim();
+            const erroMsg = document.getElementById('erro-login');
+
+            let logado = false;
+            let nomeLogado = "ADMIN";
+
+            // Autenticação oficial do sistema (Master)
+            if (usuario === 'admin' && senha === 'ffff@2026') {
+                logado = true;
+            } else {
+                // Checa no banco de dados via API Python
+                try {
+                    const resp = await fetch('/api/db');
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        const db = data.funcionarios || [];
+                        const funcValido = db.find(f => f.login.toLowerCase() === usuario && f.senha === senha && f.status === 'Ativo');
+                        if (funcValido) {
+                            logado = true;
+                            nomeLogado = funcValido.nome.split(' ')[0].toUpperCase();
+                        }
+                    }
+                } catch (e) {
+                    console.error("Erro ao comunicar com a API", e);
+                }
+            }
+
+            if (logado) {
+                sessionStorage.setItem('farmacia_auth', 'true');
+                sessionStorage.setItem('farmacia_user_nome', nomeLogado);
+                window.location.href = 'menu.html';
+            } else {
+                erroMsg.style.display = 'block';
+                senhaInput.value = '';
+                senhaInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>
