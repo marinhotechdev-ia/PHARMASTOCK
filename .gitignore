@@ -1,1 +1,8 @@
 /planejamento
+.env
+backend/node_modules   
+backend/db.sqlite
+PHARMASTOCK.code-workspace  
+backend/server.js
+.DS_Store
+database.json
