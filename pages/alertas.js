@@ -76,12 +76,12 @@
     return `
       <div class="alrt-card ${conf.border}">
         <div class="alrt-card__header">
-          <h3 class="alrt-card__titulo">${item.nome}</h3>
-          <span class="alrt-card__badge ${conf.badge}">${conf.texto}</span>
+          <h3 class="alrt-card__titulo">${escapeHtml(item.nome)}</h3>
+          <span class="alrt-card__badge ${conf.badge}">${escapeHtml(conf.texto)}</span>
         </div>
         <div class="alrt-card__info">
-          <span>Lote: <strong class="card-lote">${item.lote}</strong></span>
-          <span>Validade: <strong>${formatarData(item.validade)}</strong></span>
+          <span>Lote: <strong class="card-lote">${escapeHtml(item.lote)}</strong></span>
+          <span>Validade: <strong>${escapeHtml(formatarData(item.validade))}</strong></span>
           <span>Qtd Atual: <strong style="color: ${corQtd}">${item.qtdAtual}</strong> (Mín: ${item.qtdMinima})</span>
         </div>
         <div class="alrt-card__acoes">

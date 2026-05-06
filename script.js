@@ -23,13 +23,33 @@
 //     relatorios.html
 //     configuracoes.html
 // =============================================================
-// ROTEADOR E AUTENTICAÇÃO
+// ROTEADOR, AUTENTICAÇÃO E SEGURANÇA
 // =============================================================
 
 // Verifica se o usuário passou pela tela de login, caso contrário bloqueia acesso direto
-if (sessionStorage.getItem('farmacia_auth') !== 'true') {
+if (sessionStorage.getItem('farmacia_auth') !== 'true' || !sessionStorage.getItem('farmacia_token')) {
   window.location.replace('index.html');
 }
+
+// ── Função global de sanitização contra XSS ───────────────────
+// Deve ser usada em todo innerHTML que injeta dados do banco.
+window.escapeHtml = function(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
+// ── Helper global para obter headers de autenticação ──────────
+window.getAuthHeaders = function() {
+  return {
+    'Content-Type': 'application/json',
+    'X-Auth-Token': sessionStorage.getItem('farmacia_token') || ''
+  };
+};
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -162,8 +182,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Botão de Logoff (Sair) ───────────────────────────────────
   const btnLogoff = document.getElementById('btn-logoff');
   if (btnLogoff) {
-    btnLogoff.addEventListener('click', () => {
-      sessionStorage.removeItem('farmacia_auth'); // Remove a sessão
+    btnLogoff.addEventListener('click', async () => {
+      // Invalida o token no servidor
+      try {
+        await fetch('/api/logout', {
+          method: 'POST',
+          headers: window.getAuthHeaders()
+        });
+      } catch (e) {
+        // Ignora erro de rede no logout
+      }
+      sessionStorage.removeItem('farmacia_auth');
+      sessionStorage.removeItem('farmacia_user_nome');
+      sessionStorage.removeItem('farmacia_token');
       window.location.replace('index.html');
     });
   }

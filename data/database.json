@@ -1,6 +1,16 @@
 {
   "funcionarios": [
     {
+      "nome": "Administrador",
+      "cpf": "000.000.000-00",
+      "cargo": "Administrador Geral",
+      "perfil": "administrador",
+      "status": "Ativo",
+      "login": "admin",
+      "telefone": "(00) 00000-0000",
+      "senha": "a80eb5f0fbaaf5f5958a8de95830c7a03a82d8bd9e24c640b834300a19165b84"
+    },
+    {
       "nome": "Diogo",
       "cpf": "830.001.970-79",
       "cargo": "Farmaceutico",
@@ -8,7 +18,7 @@
       "status": "Ativo",
       "login": "diogom",
       "telefone": "(34) 12345-6789",
-      "senha": "ffff@2026"
+      "senha": "a80eb5f0fbaaf5f5958a8de95830c7a03a82d8bd9e24c640b834300a19165b84"
     },
     {
       "nome": "Ana Paula Ramos",
@@ -18,7 +28,7 @@
       "status": "Ativo",
       "login": "ana.ramos",
       "telefone": "(11) 91234-5678",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "Carlos Mendes",
@@ -28,7 +38,7 @@
       "status": "Inativo",
       "login": "carlos.mendes",
       "telefone": "(21) 98765-1234",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "Beatriz Lima",
@@ -38,7 +48,7 @@
       "status": "Ativo",
       "login": "beatriz.lima",
       "telefone": "(31) 91111-2222",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "Diego Souza",
@@ -48,7 +58,7 @@
       "status": "Ativo",
       "login": "diego.souza",
       "telefone": "(41) 92222-3333",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "Elaine Costa",
@@ -58,7 +68,7 @@
       "status": "Ativo",
       "login": "elaine.costa",
       "telefone": "(51) 93333-4444",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "Felipe Almeida",
@@ -68,7 +78,7 @@
       "status": "Ativo",
       "login": "felipe.almeida",
       "telefone": "(61) 94444-5555",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "Gabriela Santos",
@@ -78,7 +88,7 @@
       "status": "Ativo",
       "login": "gabriela.santos",
       "telefone": "(71) 95555-6666",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "Henrique Pereira",
@@ -88,7 +98,7 @@
       "status": "Inativo",
       "login": "henrique.pereira",
       "telefone": "(81) 96666-7777",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "Isabela Martins",
@@ -98,7 +108,7 @@
       "status": "Ativo",
       "login": "isabela.martins",
       "telefone": "(91) 97777-8888",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     },
     {
       "nome": "João Carvalho",
@@ -108,7 +118,7 @@
       "status": "Ativo",
       "login": "joao.carvalho",
       "telefone": "(11) 98888-9999",
-      "senha": "123"
+      "senha": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
     }
   ],
   "clientes": [

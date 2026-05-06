@@ -82,7 +82,7 @@
           try {
             await fetch('/api/db', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: window.getAuthHeaders(),
               body: JSON.stringify({ laboratorios: mockLaboratorios })
             });
             alert('Laboratório salvo no banco de dados!');
@@ -138,11 +138,11 @@
       const trMain = document.createElement('tr');
       trMain.innerHTML = `
         <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
-        <td>${lab.nome}</td>
-        <td>${lab.cnpj}</td>
+        <td>${escapeHtml(lab.nome)}</td>
+        <td>${escapeHtml(lab.cnpj)}</td>
         <td>
           <div class="lab-tabela__acoes">
-            <button class="btn-secundario" data-action="edit" aria-label="Editar ${lab.nome}">Editar</button>
+            <button class="btn-secundario" data-action="edit" aria-label="Editar ${escapeHtml(lab.nome)}">Editar</button>
           </div>
         </td>
       `;
@@ -152,7 +152,7 @@
       trDetails.innerHTML = `
         <td colspan="4">
           <div class="detalhes-conteudo">
-            <p><strong>Produtos Vinculados:</strong> ${lab.vinculados}</p>
+            <p><strong>Produtos Vinculados:</strong> ${escapeHtml(lab.vinculados)}</p>
           </div>
         </td>
       `;

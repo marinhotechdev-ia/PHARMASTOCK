@@ -137,7 +137,7 @@
             try {
               await fetch('/api/db', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: window.getAuthHeaders(),
                 body: JSON.stringify({ estoque: mockEstoque })
               });
               alert('Produto salvo no banco de dados!');
@@ -182,15 +182,15 @@
 
       trMain.innerHTML = `
         <td>
-          <strong>${prod.nome}</strong><br>
-          <small style="color: #666;">${prod.ean}</small>
+          <strong>${escapeHtml(prod.nome)}</strong><br>
+          <small style="color: #666;">${escapeHtml(prod.ean)}</small>
         </td>
-        <td>${prod.categoria}</td>
-        <td>${prod.lab}</td>
-        <td>${prod.und}</td>
-        <td>${prod.preco}</td>
+        <td>${escapeHtml(prod.categoria)}</td>
+        <td>${escapeHtml(prod.lab)}</td>
+        <td>${escapeHtml(prod.und)}</td>
+        <td>${escapeHtml(prod.preco)}</td>
         <td>${qtEstoque} / ${prod.min}</td>
-        <td><span class="badge ${isAtivo ? 'badge--ativo' : 'badge--inativo'}">${prod.status}</span></td>
+        <td><span class="badge ${isAtivo ? 'badge--ativo' : 'badge--inativo'}">${escapeHtml(prod.status)}</span></td>
         <td>
           <div class="estq-tabela__acoes">
             <button class="btn-secundario" data-action="edit" style="padding: 4px 10px; font-size: 0.8rem;">Editar</button>

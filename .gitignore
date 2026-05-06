@@ -1,1 +1,63 @@
+# ══════════════════════════════════════════════════════
+# PHARMASTOCK — .gitignore
+# ══════════════════════════════════════════════════════
+
+# ── Banco de Dados (contém dados sensíveis) ──────────
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Scripts auxiliares de uso único ──────────────────
+hash_senhas.py
+populate_db.py
+fix_db.py
+add_despesas.py
+add_movimentos.py
+add_vendas_movimentos.py
+make_favicon.py
+
+# ── Arquivos de planejamento / rascunho ──────────────
 /planejamento
+teste.txt
+*.log
+
+# ── Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Node / NPM (caso adicione no futuro) ────────────
+node_modules/
+package-lock.json
+yarn.lock
+
+# ── IDEs e Editores ─────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# ── Sistema Operacional ─────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*.orig
+
+# ── Gemini / IA ─────────────────────────────────────
+.gemini/
