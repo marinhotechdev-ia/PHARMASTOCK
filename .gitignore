@@ -1,9 +1,49 @@
+# Arquivos de Planejamento e Docs
 /planejamento
+
+# Ambiente e Configurações Sensíveis
 .env
-backend/node_modules   
+.venv/
+env/
+venv/
+ENV/
+*.code-workspace
+*.pem
+*.key
+*.cert
+
+# Dependências
+node_modules/
+backend/node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.cache/
+
+# Bancos de Dados e Dados Locais
+*.sqlite
+*.sqlite3
+*.db
 backend/db.sqlite
-PHARMASTOCK.code-workspace  
-backend/server.js
-.DS_Store
 database.json
 data/
+
+# Logs e Temporários
+*.log
+*.bak
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+teste.txt
+
+# IDEs e Editores
+.vscode/
+.idea/
+.project
+.settings/
+.classpath
+
+# Scripts de Servidor específicos (se necessário)
+backend/server.js
