@@ -47,45 +47,49 @@
             this.style.opacity = type === 'text' ? '1' : '0.7';
         });
 
-        // Autenticação básica
+        // Autenticação segura via API do servidor
         document.querySelector('.login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const usuario = document.getElementById('usuario').value.trim().toLowerCase();
             const senha = senhaInput.value.trim();
             const erroMsg = document.getElementById('erro-login');
+            const btnLogin = document.querySelector('.login-btn');
 
-            let logado = false;
-            let nomeLogado = "ADMIN";
-
-            // Autenticação oficial do sistema (Master)
-            if (usuario === 'admin' && senha === 'ffff@2026') {
-                logado = true;
-            } else {
-                // Checa no banco de dados via API Python
-                try {
-                    const resp = await fetch('/api/db');
-                    if (resp.ok) {
-                        const data = await resp.json();
-                        const db = data.funcionarios || [];
-                        const funcValido = db.find(f => f.login.toLowerCase() === usuario && f.senha === senha && f.status === 'Ativo');
-                        if (funcValido) {
-                            logado = true;
-                            nomeLogado = funcValido.nome.split(' ')[0].toUpperCase();
-                        }
-                    }
-                } catch (e) {
-                    console.error("Erro ao comunicar com a API", e);
-                }
+            if (!usuario || !senha) {
+                erroMsg.style.display = 'block';
+                return;
             }
 
-            if (logado) {
-                sessionStorage.setItem('farmacia_auth', 'true');
-                sessionStorage.setItem('farmacia_user_nome', nomeLogado);
-                window.location.href = 'menu.html';
-            } else {
+            // Desabilita o botão durante a requisição
+            btnLogin.disabled = true;
+            btnLogin.textContent = 'VERIFICANDO...';
+
+            try {
+                const resp = await fetch('/api/auth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usuario, senha })
+                });
+
+                const resultado = await resp.json();
+
+                if (resultado.ok) {
+                    sessionStorage.setItem('farmacia_auth', 'true');
+                    sessionStorage.setItem('farmacia_user_nome', resultado.nome);
+                    sessionStorage.setItem('farmacia_token', resultado.token);
+                    window.location.href = 'menu.html';
+                } else {
+                    erroMsg.style.display = 'block';
+                    senhaInput.value = '';
+                    senhaInput.focus();
+                }
+            } catch (err) {
+                console.error("Erro ao comunicar com o servidor:", err);
+                erroMsg.textContent = 'Erro de conexão com o servidor!';
                 erroMsg.style.display = 'block';
-                senhaInput.value = '';
-                senhaInput.focus();
+            } finally {
+                btnLogin.disabled = false;
+                btnLogin.textContent = 'LOGIN';
             }
         });
     </script>

@@ -79,8 +79,8 @@
       
       tr.innerHTML = `
         <td>
-          <strong>${item.nome}</strong><br>
-          <small style="color: #888; font-size: 0.85rem;">${item.ean}</small>
+          <strong>${escapeHtml(item.nome)}</strong><br>
+          <small style="color: #888; font-size: 0.85rem;">${escapeHtml(item.ean)}</small>
         </td>
         <td style="text-align: center;">
           <input type="number" class="pdv-input-qtd" data-index="${index}" value="${item.qtd}" min="1">
@@ -135,7 +135,7 @@
     dadosVenda.itens.forEach(item => {
       containerItens.innerHTML += `
         <div class="recibo-item-linha">
-          <span>${item.qtd}x ${item.nome}</span>
+          <span>${item.qtd}x ${escapeHtml(item.nome)}</span>
           <span>${formatarMoeda(item.preco * item.qtd)}</span>
         </div>
       `;

@@ -126,7 +126,7 @@
           try {
             await fetch('/api/db', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: window.getAuthHeaders(),
               body: JSON.stringify({ fornecedores: mockFornecedores })
             });
             alert('Fornecedor salvo no banco de dados!');
@@ -183,13 +183,13 @@
       const trMain = document.createElement('tr');
       trMain.innerHTML = `
         <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
-        <td>${forn.fantasia}</td>
-        <td>${forn.cnpj}</td>
-        <td>${forn.telefone}</td>
-        <td><span class="badge ${isAtivo ? 'badge--ativo' : 'badge--inativo'}">${forn.status}</span></td>
+        <td>${escapeHtml(forn.fantasia)}</td>
+        <td>${escapeHtml(forn.cnpj)}</td>
+        <td>${escapeHtml(forn.telefone)}</td>
+        <td><span class="badge ${isAtivo ? 'badge--ativo' : 'badge--inativo'}">${escapeHtml(forn.status)}</span></td>
         <td>
           <div class="forn-tabela__acoes">
-            <button class="btn-secundario" data-action="edit" aria-label="Editar ${forn.fantasia}">Editar</button>
+            <button class="btn-secundario" data-action="edit" aria-label="Editar ${escapeHtml(forn.fantasia)}">Editar</button>
           </div>
         </td>
       `;
@@ -199,11 +199,11 @@
       trDetails.innerHTML = `
         <td colspan="6">
           <div class="detalhes-conteudo">
-            <p><strong>Razão Social:</strong> ${forn.razao || ''}</p>
-            <p><strong>Inscrição Est.:</strong> ${forn.ie || ''}</p>
-            <p><strong>E-mail de Pedidos:</strong> ${forn.email || ''}</p>
-            <p><strong>Endereço:</strong> ${forn.endereco || ''}</p>
-            <p><strong>Representante:</strong> ${forn.repNome || ''} - ${forn.repContato || ''}</p>
+            <p><strong>Razão Social:</strong> ${escapeHtml(forn.razao || '')}</p>
+            <p><strong>Inscrição Est.:</strong> ${escapeHtml(forn.ie || '')}</p>
+            <p><strong>E-mail de Pedidos:</strong> ${escapeHtml(forn.email || '')}</p>
+            <p><strong>Endereço:</strong> ${escapeHtml(forn.endereco || '')}</p>
+            <p><strong>Representante:</strong> ${escapeHtml(forn.repNome || '')} - ${escapeHtml(forn.repContato || '')}</p>
           </div>
         </td>
       `;

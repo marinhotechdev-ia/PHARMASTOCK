@@ -64,11 +64,11 @@
 
       const novaLinha = document.createElement('tr');
       novaLinha.innerHTML = `
-        <td>${dataFormatada}</td>
-        <td>${produtoStr.split(' - ')[0]}</td> <!-- Pega só o nome antes do EAN -->
-        <td><span class="badge ${badgeClass}">${textoBadge}</span></td>
-        <td style="font-weight: bold; color: ${qtdColor};">${qtdDisplay}</td>
-        <td>${lote}</td>
+        <td>${escapeHtml(dataFormatada)}</td>
+        <td>${escapeHtml(produtoStr.split(' - ')[0])}</td> <!-- Pega só o nome antes do EAN -->
+        <td><span class="badge ${badgeClass}">${escapeHtml(textoBadge)}</span></td>
+        <td style="font-weight: bold; color: ${qtdColor};">${escapeHtml(qtdDisplay)}</td>
+        <td>${escapeHtml(lote)}</td>
         <td>Admin Atual</td>
       `;
       tbodyHistorico.prepend(novaLinha);

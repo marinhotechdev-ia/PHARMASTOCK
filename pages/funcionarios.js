@@ -144,7 +144,7 @@
     try {
       await fetch('/api/db', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: window.getAuthHeaders(),
         body: JSON.stringify({ funcionarios: mockFuncionarios })
       });
       alert('Funcionário cadastrado com sucesso e salvo no banco de dados!');
@@ -204,14 +204,14 @@
       const trMain = document.createElement('tr');
       trMain.innerHTML = `
         <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
-        <td>${func.nome}</td>
-        <td>${func.cpf}</td>
-        <td>${func.cargo}</td>
-        <td><span class="badge ${classBadge}">${nomePerfil}</span></td>
-        <td><span class="badge ${isAtivo ? 'badge--ativo' : 'badge--inativo'}">${func.status}</span></td>
+        <td>${escapeHtml(func.nome)}</td>
+        <td>${escapeHtml(func.cpf)}</td>
+        <td>${escapeHtml(func.cargo)}</td>
+        <td><span class="badge ${classBadge}">${escapeHtml(nomePerfil)}</span></td>
+        <td><span class="badge ${isAtivo ? 'badge--ativo' : 'badge--inativo'}">${escapeHtml(func.status)}</span></td>
         <td>
           <div class="func-tabela__acoes">
-            <button class="btn-secundario" data-action="edit" aria-label="Editar ${func.nome}">Editar</button>
+            <button class="btn-secundario" data-action="edit" aria-label="Editar ${escapeHtml(func.nome)}">Editar</button>
           </div>
         </td>
       `;
@@ -221,8 +221,8 @@
       trDetails.innerHTML = `
         <td colspan="7">
           <div class="detalhes-conteudo">
-            <p><strong>Login:</strong> ${func.login}</p>
-            <p><strong>Telefone:</strong> ${func.telefone}</p>
+            <p><strong>Login:</strong> ${escapeHtml(func.login)}</p>
+            <p><strong>Telefone:</strong> ${escapeHtml(func.telefone)}</p>
           </div>
         </td>
       `;

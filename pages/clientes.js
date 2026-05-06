@@ -125,7 +125,7 @@
             try {
               await fetch('/api/db', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: window.getAuthHeaders(),
                 body: JSON.stringify({ clientes: mockClientes })
               });
               alert('Cliente salvo no banco de dados!');
@@ -199,13 +199,13 @@
       const trMain = document.createElement('tr');
       trMain.innerHTML = `
         <td style="text-align: center;"><button class="btn-expandir" data-action="expand" aria-expanded="false" aria-label="Ver detalhes">▼</button></td>
-        <td>${cli.nome}</td>
-        <td>${cli.cpf}</td>
-        <td>${cli.telefone}</td>
-        <td><span class="badge ${isAtivo ? 'badge--ativo' : 'badge--inativo'}">${cli.status}</span></td>
+        <td>${escapeHtml(cli.nome)}</td>
+        <td>${escapeHtml(cli.cpf)}</td>
+        <td>${escapeHtml(cli.telefone)}</td>
+        <td><span class="badge ${isAtivo ? 'badge--ativo' : 'badge--inativo'}">${escapeHtml(cli.status)}</span></td>
         <td>
           <div class="cli-tabela__acoes">
-            <button class="btn-secundario" data-action="edit" aria-label="Editar ${cli.nome}">Editar</button>
+            <button class="btn-secundario" data-action="edit" aria-label="Editar ${escapeHtml(cli.nome)}">Editar</button>
           </div>
         </td>
       `;
@@ -215,10 +215,10 @@
       trDetails.innerHTML = `
         <td colspan="6">
           <div class="detalhes-conteudo">
-            <p><strong>E-mail:</strong> ${cli.email}</p>
-            <p><strong>Data de Nasc:</strong> ${cli.nascimento}</p>
-            <p><strong>Endereço:</strong> ${cli.endereco}</p>
-            <p><strong>Uso Contínuo:</strong> ${cli.uso}</p>
+            <p><strong>E-mail:</strong> ${escapeHtml(cli.email)}</p>
+            <p><strong>Data de Nasc:</strong> ${escapeHtml(cli.nascimento)}</p>
+            <p><strong>Endereço:</strong> ${escapeHtml(cli.endereco)}</p>
+            <p><strong>Uso Contínuo:</strong> ${escapeHtml(cli.uso)}</p>
           </div>
         </td>
       `;
